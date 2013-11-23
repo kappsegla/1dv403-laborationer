@@ -2,16 +2,37 @@
 
 window.onload = function(){
 
-	
+	/*Function copied from http://stackoverflow.com/a/2483476*/
+	var daysBetween = function(one, two){
+		// Do the math.
+   		var millisecondsPerDay = 1000 * 60 * 60 * 24;
+        var millisBetween = two.getTime() - one.getTime();
+   		var days = millisBetween / millisecondsPerDay;
+
+    	// Round down.
+    	return Math.floor(days);
+	}
+
 	var birthday = function(date){
+
+		//Error handling if date isn't in the format 2013-11-22 must be implemented.
+		var bday = new Date(date);
 		
+		var today = new Date();
+		bday.setHours(0,0,0,0);
+		today.setHours(0,0,0,0);
+	
+		bday.setFullYear(today.getFullYear());
+		
+		var diff = daysBetween(today, bday);
 
+		if( diff < 0 ) {
+			//Negative number, already had birthday this year.
+			bday.setFullYear( bday.getFullYear() +  1 );
+			diff = daysBetween(today, bday);
+		}
 
-			// Din kod här.
-
-
-
-
+		return diff;
 	};
 	// ------------------------------------------------------------------------------
 
